@@ -4,13 +4,18 @@ import type { PaginationProps } from "antd";
 import { Pagination } from "antd";
 
 function App() {
+  
 
   const onShowSizeChange: PaginationProps["onShowSizeChange"] = (
     current,
     pageSize
   ) => {
-    console.log("current: ",current,"\n pagesize: ", pageSize);
+    console.log("currentPage: ",current,"\n pagesize: ", pageSize);
   };
+
+  React.useEffect(() => {
+
+  }, [])
 
   return (
     <div>

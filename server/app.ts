@@ -4,14 +4,14 @@ import morgan from "morgan";
 import mongoose from 'mongoose';
 import * as dotenv from 'dotenv';
 import 'dotenv/config';
-import userRoute from './route/user';
-import bookingRoute from "./route/booking"
-import doctorRoute from "./route/doctor"
-import patientRoute from "./route/patient"
-import slotsRoute from "./route/slots"
 
-import Human from './models/human';
-import Patient from './models/patient';
+const { ApolloServer } = require("apollo-server");
+const { typeDefs } = require("./schema/type-defs");
+const { resolvers } = require("./schema/resolvers")
+const server = new ApolloServer({ typeDefs, resolvers });
+// server.listen().then(({ url }) => {
+//   console.log(`Your API is running at ${url}`); 
+// })
 
 
 dotenv.config();
@@ -28,22 +28,7 @@ app.use(express.json());
 app.use(morgan("tiny"));
 
 
-//Routes
-app.use("/api/v1/user", userRoute);
-app.use("/api/v1/booking", bookingRoute);
-app.use("/api/v1/doctor", doctorRoute);
-app.use("/api/v1/patient", patientRoute);
-app.use("/api/v1/slots", slotsRoute);
 
-//base route
-app.get("/human",async (req: Request, res: Response) => {
-  const abcData = await Human.find()
-  console.log(abcData)
-  res.send(abcData);
-  // console.log('====================================');
-  // console.log('Ahmad this api is working');
-  // console.log('====================================');
-});
 
 
 //Database
@@ -51,12 +36,14 @@ mongoose
   .connect("mongodb+srv://ahmadjajja86:ahmadjajja86@cluster0.ua4hncd.mongodb.net/Testing?retryWrites=true&w=majority")
   .then(() => {
     console.log("Database Connection is ready...");
-    app.listen(port, () => {
-      console.log(`⚡️[server]: Server is running at https://localhost:${port}`);
-    });
+    // app.listen(port, () => {
+    //   console.log(`⚡️[server]: Server is running at https://localhost:${port}`);
+    // });
+    server.listen().then(({port} : {port:any}) => {
+      console.log(`Your API is running at ${port}`); 
+  })
   })
   .catch((err) => {
     // throw createHttpError(501, "Unable to connect to database");
     console.log(err);
   });
-
