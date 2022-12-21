@@ -1,13 +1,9 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-// const { gql } = require("apollo-server");
-const apollo_server_1 = __importDefault(require("apollo-server"));
-const typeDefs = (0, apollo_server_1.default) `
+const graphql_1 = require("graphql");
+const typeDefs = (0, graphql_1.buildSchema)(`
   type Record {
-    id: ID!
+    id: ID
     index: Int
     isActive: Boolean
     balance: String
@@ -27,7 +23,7 @@ const typeDefs = (0, apollo_server_1.default) `
   }
   type Query {
     records: [Record!]!
-    record(pageNumber: Int!, pageSize: Int!): Record!
+    record(pageNumber: Int!, pageSize: Int!): [Record!]!
   }
-`;
+`);
 module.exports = { typeDefs };

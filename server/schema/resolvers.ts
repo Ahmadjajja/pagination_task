@@ -4,18 +4,24 @@ const _ = require("lodash");
 const resolvers = {
   Query: {
     //MOVIE RESOLVERS
-    records: () => {
-      const humanRecords = Human.find();
+    records: async () => {
+      const humanRecords =await Human.find();
       console.log("humanRecords: ", humanRecords);
       return humanRecords;
     },
 
-    record: (parent:any, args:any) => {
-      const { pageNumber, pageSize } = args;
-      console.log("pageNumber", pageNumber);
+    record:async (parent:any, args:any) => { 
+      const humanRecords =await Human.find();
+      let { pageNumber, pageSize } = args;
+      pageNumber = Number(pageNumber)
+      pageSize = Number(pageSize)
+  
+      let skip:number = pageSize * (pageNumber -1);
+      let limit:number = pageSize;
 
-      //   const movie = _.find(MovieList, { name });
-      //   return movie;
+      const desiredRecords = humanRecords.filter((currentRecord, index) => (index  >= skip && index < (skip + limit)))
+      return desiredRecords 
+      
     },
   },
 };

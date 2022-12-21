@@ -1,9 +1,9 @@
 // const { gql } = require("apollo-server");
 import gql from "apollo-server"
-
-const typeDefs = gql`
+import { buildSchema } from "graphql";
+const typeDefs = buildSchema(`
   type Record {
-    id: ID!
+    id: ID
     index: Int
     isActive: Boolean
     balance: String
@@ -23,8 +23,8 @@ const typeDefs = gql`
   }
   type Query {
     records: [Record!]!
-    record(pageNumber: Int!, pageSize: Int!): Record!
+    record(pageNumber: Int!, pageSize: Int!): [Record!]!
   }
-`;
+`); 
 
 module.exports = { typeDefs };

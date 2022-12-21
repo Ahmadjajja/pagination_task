@@ -57,8 +57,9 @@ mongoose_1.default
     // app.listen(port, () => {
     //   console.log(`⚡️[server]: Server is running at https://localhost:${port}`);
     // });
+    console.log(port);
     server.listen().then(({ port }) => {
-        console.log(`Your API is running at ${port}`);
+        console.log(`Your API is running at  https://localhost:${port}`);
     });
 })
     .catch((err) => {
