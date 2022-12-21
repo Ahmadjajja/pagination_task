@@ -24,14 +24,14 @@ const resolvers = {
             return humanRecords;
         }),
         record: (parent, args) => __awaiter(void 0, void 0, void 0, function* () {
-            const humanRecords = yield human_1.default.find();
             let { pageNumber, pageSize } = args;
             pageNumber = Number(pageNumber);
             pageSize = Number(pageSize);
+            const humanRecords = yield human_1.default.find().skip(pageSize * (pageNumber - 1)).limit(pageSize);
             let skip = pageSize * (pageNumber - 1);
             let limit = pageSize;
-            const desiredRecords = humanRecords.filter((currentRecord, index) => (index >= skip && index < (skip + limit)));
-            return desiredRecords;
+            // const desiredRecords = humanRecords.filter((currentRecord, index) => (index  >= skip && index < (skip + limit)))
+            return humanRecords;
         }),
     },
 };

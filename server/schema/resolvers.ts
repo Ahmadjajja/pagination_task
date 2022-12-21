@@ -11,16 +11,16 @@ const resolvers = {
     },
 
     record:async (parent:any, args:any) => { 
-      const humanRecords =await Human.find();
       let { pageNumber, pageSize } = args;
       pageNumber = Number(pageNumber)
       pageSize = Number(pageSize)
+      const humanRecords =await Human.find().skip(pageSize* (pageNumber-1)).limit(pageSize);
   
       let skip:number = pageSize * (pageNumber -1);
       let limit:number = pageSize;
 
-      const desiredRecords = humanRecords.filter((currentRecord, index) => (index  >= skip && index < (skip + limit)))
-      return desiredRecords 
+      // const desiredRecords = humanRecords.filter((currentRecord, index) => (index  >= skip && index < (skip + limit)))
+      return humanRecords 
       
     },
   },
