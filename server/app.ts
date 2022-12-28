@@ -9,9 +9,6 @@ const { ApolloServer } = require("apollo-server");
 const { typeDefs } = require("./schema/type-defs");
 const { resolvers } = require("./schema/resolvers")
 const server = new ApolloServer({ typeDefs, resolvers });
-// server.listen().then(({ url }) => {
-//   console.log(`Your API is running at ${url}`); 
-// })
 
 
 dotenv.config();
@@ -36,9 +33,6 @@ mongoose
   .connect("mongodb+srv://ahmadjajja86:ahmadjajja86@cluster0.ua4hncd.mongodb.net/Testing?retryWrites=true&w=majority")
   .then(() => {
     console.log("Database Connection is ready...");
-    // app.listen(port, () => {
-    //   console.log(`⚡️[server]: Server is running at https://localhost:${port}`);
-    // });
     console.log(port);
     
     server.listen().then(({port} : {port:any}) => {
