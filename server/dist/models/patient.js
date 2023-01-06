@@ -50,12 +50,5 @@ const patientSchema = new mongoose_1.default.Schema({
         required: true,
     },
 });
-// categorySchema.virtual('id').get(function () {
-//     return this._id.toHexString();
-// });
-// categorySchema.set('toJSON', {
-//     virtuals: true,
-// });
-// exports.Patient = mongoose.model('Patient', patientSchema);
 const Patient = mongoose_1.default.model('patients', patientSchema);
 exports.default = Patient;

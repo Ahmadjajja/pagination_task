@@ -8,7 +8,7 @@ import Doctor from "./doctor";
 interface bookingSchemaTypes {
     patientId: mongoose.Types.ObjectId;
     doctorId: mongoose.Types.ObjectId;
-    slotsId: mongoose.Types.ObjectId;
+    // slotsId: mongoose.Types.ObjectId;
   }
 
 const bookingSchema = new mongoose.Schema<bookingSchemaTypes>({
@@ -22,11 +22,11 @@ const bookingSchema = new mongoose.Schema<bookingSchemaTypes>({
         ref: Doctor,
         required:true
     },
-    slotsId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: Slots,
-        required:true
-    },
+    // slotsId: {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: Slots,
+    //     required:true
+    // },
 })
 
 const Booking = mongoose.model<bookingSchemaTypes>('bookings', bookingSchema);

@@ -61,15 +61,6 @@ const patientSchema = new mongoose.Schema<patientSchemaTypes>({
         required: true,
     }, 
 })
-// categorySchema.virtual('id').get(function () {
-//     return this._id.toHexString();
-// });
-
-// categorySchema.set('toJSON', {
-//     virtuals: true,
-// });
-
-// exports.Patient = mongoose.model('Patient', patientSchema);
 
 const Patient = mongoose.model<patientSchemaTypes>('patients', patientSchema);
 

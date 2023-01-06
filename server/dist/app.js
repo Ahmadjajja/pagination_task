@@ -53,7 +53,7 @@ mongoose_1.default
     console.log("Database Connection is ready...");
     console.log(port);
     server.listen().then(({ port }) => {
-        console.log(`Your API is running at  https://localhost:${port}`);
+        console.log(`Your API is running at  http://localhost:${port}`);
     });
 })
     .catch((err) => {
