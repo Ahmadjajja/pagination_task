@@ -49,10 +49,16 @@ const typeDefs = buildSchema(`
     registered: String
     qualification: String 
   }
+  type tags{
+    id:ID
+    title: String
+    color: String
+  }
   type booking {
     id: ID
     patientData: patient
     doctorData: doctor
+    tagsData: tags
     count: Int
   }
 

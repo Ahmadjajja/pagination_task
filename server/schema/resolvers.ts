@@ -2,7 +2,7 @@
 import Human from "../models/human";
 const _ = require("lodash");
 import Booking from "../models/booking";
-
+import Tags from "../models/tags";
 const resolvers = {
   Query: {
     //MOVIE RESOLVERS
@@ -94,11 +94,17 @@ const resolvers = {
       //     },
       //   },
       // ]);
+      // {path: 'category_id', select: 'name'}
+
+      const tags: any = await Booking.find().populate("tagsId")  
+      .then(p => console.log(p))
+      .catch(err => console.log(err))
+      
 
       const bookingList:any = await Booking.aggregate([
         {
           $lookup: {
-            from: "patients",
+            from: "patients", 
             localField: "patientId",
             foreignField: "_id",
             as: "patientData",
@@ -115,6 +121,18 @@ const resolvers = {
         },
         { $unwind: "$doctorData" },
         {
+          $lookup: {
+            from: "tags",
+            localField: "tagsId",
+            foreignField: "_id",
+            as: "tagsData",
+          },
+        },
+        { $unwind: "$tagsData" },
+        {
+          $setWindowFields: { output: {total : {$count: {}}}}
+        },
+        {
           $skip: skip,
         },
         {
@@ -124,10 +142,10 @@ const resolvers = {
           $addFields: { count: bookingListCount },
         },
       ]);
-      console.log("bookingList: ", bookingList);
+      // console.log("bookingList: ", bookingList);
 
       return bookingList;
-    },
+    }, 
   },
 };
 
