@@ -102,9 +102,9 @@ const resolvers = {
             //   },
             // ]);
             // {path: 'category_id', select: 'name'}
-            const tags = yield booking_1.default.find().populate("tagsId")
-                .then(p => console.log(p))
-                .catch(err => console.log(err));
+            // const tags: any = await Booking.find().populate("tagsId")  
+            // .then(p => console.log(p))
+            // .catch(err => console.log(err))
             const bookingList = yield booking_1.default.aggregate([
                 {
                     $lookup: {
@@ -133,18 +133,18 @@ const resolvers = {
                     },
                 },
                 { $unwind: "$tagsData" },
-                {
-                    $setWindowFields: { output: { total: { $count: {} } } }
-                },
+                // {
+                //   $setWindowFields: { output: {total : {$count: {}}}}
+                // },
                 {
                     $skip: skip,
                 },
                 {
                     $limit: limit,
                 },
-                {
-                    $addFields: { count: bookingListCount },
-                },
+                // {
+                //   $addFields: { count: bookingListCount },
+                // },
             ]);
             // console.log("bookingList: ", bookingList);
             return bookingList;

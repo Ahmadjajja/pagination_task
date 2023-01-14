@@ -96,9 +96,9 @@ const resolvers = {
       // ]);
       // {path: 'category_id', select: 'name'}
 
-      const tags: any = await Booking.find().populate("tagsId")  
-      .then(p => console.log(p))
-      .catch(err => console.log(err))
+      // const tags: any = await Booking.find().populate("tagsId")  
+      // .then(p => console.log(p))
+      // .catch(err => console.log(err))
       
 
       const bookingList:any = await Booking.aggregate([
@@ -129,18 +129,18 @@ const resolvers = {
           },
         },
         { $unwind: "$tagsData" },
-        {
-          $setWindowFields: { output: {total : {$count: {}}}}
-        },
+        // {
+        //   $setWindowFields: { output: {total : {$count: {}}}}
+        // },
         {
           $skip: skip,
         },
         {
           $limit: limit,
         },
-        {
-          $addFields: { count: bookingListCount },
-        },
+        // {
+        //   $addFields: { count: bookingListCount },
+        // },
       ]);
       // console.log("bookingList: ", bookingList);
 

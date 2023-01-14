@@ -70,4 +70,4 @@ const typeDefs = buildSchema(`
   }
 `); 
 
-module.exports = { typeDefs }; 
+module.exports = { typeDefs };  
